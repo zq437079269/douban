@@ -1,7 +1,11 @@
 <template>
   <div class="home">
+<<<<<<< HEAD
    <List></List>
 
+=======
+    <List></List>
+>>>>>>> 20191015
   </div>
 </template>
 
