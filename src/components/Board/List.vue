@@ -1,14 +1,17 @@
 <template>
     <div>
-       ggggg 
+        <movie-list movietype="in_theaters" />
+        <movie-list movietype="coming_soon" />
+        <!-- <movie-list movietype="weekly" /> -->
+        <movie-list movietype="top250" />
     </div>
 </template>
-
 <script>
-    export default{
-        name:'List',
-        data:()=>({
-
-        })
+import MovieList from '@/components/common/MovieList.vue'
+export default {
+    name:"list",
+    components:{
+        MovieList,
     }
+}
 </script>
