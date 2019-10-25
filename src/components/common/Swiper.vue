@@ -1,7 +1,7 @@
 <template>
   <div class="container" >
     <mt-swipe :auto="4000" :continuous='Continuous' v-show="!isShowLoading" >
-    <mt-swipe-item v-for="(item,index) of items" :index="index" :key="index">
+    <mt-swipe-item v-for="(item,index) of items" :index="index" :key="index" @click.native="handleitemClick(item.id)">
     <img :src="item.images.large"  :class="{Imgheight : isImgExpend}">
     <mt-button  v-if="(index==items.length-1 && isShowButton)"
                 @click="handleClick" 
@@ -37,6 +37,10 @@
           Continuous:{
               type :Boolean,
               default:false
+          },
+          enableClick:{
+              type: Boolean,
+              required:true
           }
       },
      data:()=>({
@@ -54,6 +58,17 @@
             this.$router.replace({
                 name:"index"
             })
+        },
+        handleitemClick(id){
+          if( this.enableClick ){
+            this.$router.push({
+              name:'detail',
+              query:{
+                  id
+              }
+          })
+          }
+          
         }
     },
 

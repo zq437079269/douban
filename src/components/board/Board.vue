@@ -5,7 +5,8 @@
     <swiper 
   :isImgExpend="false"
   :isShowButton="false"
-  :Continuous="true">
+  :Continuous="true"
+  :enableClick="true">
   </swiper>
       </div>
   <list></list>
@@ -16,16 +17,30 @@
 <script>
 import Swiper from '@/components/common/Swiper.vue'
 import List from '@/components/board/List.vue'
+import {mapMutations} from 'vuex'
 import BScroll from 'better-scroll'
 export default {
   name:"board",
-  components:{
-    Swiper,
-    List
-  },
-   mounted(){ 
-    new BScroll("#board-scorll")
-  }
+    data(){
+      return{
+
+      }
+    },
+    methods:{
+        ...mapMutations(['changeTitle'])
+    },
+    components:{
+      Swiper,
+      List
+    },
+      created(){
+        this.changeTitle('榜单')
+      },
+    mounted(){ 
+        new BScroll("#board-scorll",{
+        click:true
+      })
+    }
 }
 </script>
 <style lang="scss" scoped>

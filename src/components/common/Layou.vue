@@ -1,5 +1,6 @@
 <template>
   <div class="index-container">
+    <my-heard :isShowheard="false"></my-heard>
   <div>
     <router-view/>
   </div>
@@ -17,6 +18,7 @@
 // @ is an alias to /src
 // import List from '@/components/Board/List.vue'
 import {Tabbar , TabItem} from "mint-ui"
+import MyHeard from "./MyHeard.vue";
 export default {
   name: 'layou',
   data (){
@@ -46,7 +48,8 @@ export default {
   },
   components:{
     [Tabbar.name]:Tabbar,
-    [TabItem.name]:TabItem
+    [TabItem.name]:TabItem,
+    MyHeard
   },
   methods:{
     handelClick(path){
@@ -57,6 +60,9 @@ export default {
       })
       
     }
+  },
+  mounted(){
+    this.$store.dispatch('getData')
   }
 }
 </script>
@@ -73,7 +79,7 @@ export default {
     height: 100%;
     @include flexbox();
     @include flex-direction(column);
-    >div:first-child{
+    >div:nth-child(2){
       @include flex();
       // overflow-x: hidden;
       // overflow: auto;

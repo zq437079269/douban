@@ -2,7 +2,8 @@
   <swiper 
   :imgCount="6"
   :isImgExpend="true"
-  :isShowButton="true">
+  :isShowButton="true"
+  :enableClick="false">
   </swiper>
 </template>
 

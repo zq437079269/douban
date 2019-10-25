@@ -1,16 +1,19 @@
 <template>
     <div class="list-container">
-    <div v-if="!isShowLoading">
-        <h3>{{title}}</h3>
-        <div :id="`list-scroll-${scrollId}`">
-        <div>
-            <figure v-for="(movie) of movielist" :key="movie.id">
-                <img :src="movie.images.large" width="90" height="125" />
-                <figcaption>{{movie.title}}</figcaption>
-            </figure>
+        <div v-if="!isShowLoading">
+            <h3 @click="handleClick()">
+            <span> {{title}} </span>
+                <span class="yo-ico" >&#xf07f;</span>
+            </h3>
+            <div :id="`list-scroll-${scrollId}`">
+                <div>
+                    <figure v-for="(movie) of movielist" :key="movie.id" @click="handitenClick(movie.id)">
+                        <img :src="movie.images.large" width="90" height="125" />
+                        <figcaption>{{movie.title}}</figcaption>
+                    </figure>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
     <div v-if="isShowLoading" class="spinner">
       <mt-spinner type="fading-circle"></mt-spinner>
     </div>
@@ -40,6 +43,23 @@ export default {
     methods:{
         genRandom(){
             return new Date().getTime()+Math.ceil(Math.random()*1000)
+        },
+        handleClick(){
+            
+            this.$router.push({
+                name:"mvlist",
+                query:{
+                    uri:this.movietype
+                }
+            })
+        },
+        handitenClick(id){
+            this.$router.push({
+                name:"detail",
+                query:{
+                    id
+                }
+            })
         }
     },
     mounted(){
@@ -74,7 +94,8 @@ export default {
         this.scrollId = changeid
         this.$nextTick(function(){
             new BScroll('#list-scroll-'+this.scrollId,{
-                scrollX:true
+                scrollX:true,
+                click:true
             })
         })
         }
@@ -89,10 +110,23 @@ export default {
         background:#fff;
         margin-top: 0.2rem;
         >div{
+            h3{
+                font-size:12px;
+                transform:font scale(0.86);
+                display:flex; 
+                justify-content:space-between;
+            }
             >div{
                 @include flexbox();
                 overflow: hidden;
-                h3,figcaption{
+                // h3{
+                //     @include flex();
+                //     font-size:12px;
+                //     transform:font scale(0.86);
+                //     justify-content:space-between;
+                //     display: flex;
+                //     }
+                figcaption{
                     font-size:12px;
                     transform:font scale(0.86);
                 }
